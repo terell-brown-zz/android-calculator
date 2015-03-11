@@ -1,0 +1,9 @@
+<resources>
+
+    <!-- App and Activity Labels -->
+    <string name="app_name">MyCalculator</string>
+    <string name="activity_main">MyCalculator</string>
+
+    <!-- App and Activity Names -->
+    <string name="main">.Main</string>
+</resources>
