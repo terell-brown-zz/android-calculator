@@ -5,12 +5,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import tbrown.com.mycalculator.MathEval;
 
-/**
- * Created by tmast_000 on 3/8/2015.
- */
+
+
 public class Main extends ActionBarActivity implements View.OnClickListener{
 
     // Import widgets into Java as Objects;
@@ -19,24 +16,13 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
             b5,b6,b7,b8,b9,bSub,bAdd,bBrac,bEquals,
             bDec,bSign;
 
-    Button[] buttons;
-
     MathEval ans = new MathEval();
-
-    /*int[] buttons = {
-            R.id.b0, R.id.b1,R.id.b2, R.id.b1,R.id.b3, R.id.b4,
-            R.id.b5, R.id.b6,R.id.b7, R.id.b8,R.id.b9, R.id.bClear,
-            R.id.bDiv, R.id.bMult,R.id.bDel, R.id.bSub,R.id.bAdd,
-            R.id.bEquals, R.id.bBrac,R.id.bDec, R.id.bSign,
-    }; */
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         initialize();
-        buttonArray();
         setListeners();
 
     }
@@ -109,6 +95,7 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         String currentText = etScreen.getText().toString();
+        boolean isEmpty = currentText.isEmpty();
         boolean isLastCharNum = isLastNum(currentText);
         switch (v.getId()) {
             case R.id.bClear:
@@ -175,9 +162,11 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
                 etScreen.setText(currentText + "");
                 break;
             case R.id.bDel:
-                if (isLastCharNum)
-                etScreen.setText(currentText.substring(0,currentText.length() - 1));
-                break;
+                // if there is text on the calculator screen then delete the last character
+                if (!isEmpty) {
+                    etScreen.setText(currentText.substring(0, currentText.length() - 1));
+                    break;
+                } else { break; }
         }
 
     }
@@ -191,14 +180,6 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
             char lastChar = s.charAt(s.length() - 1);
             return Character.isDigit(lastChar);
         }
-    }
-
-
-    public void buttonArray() {
-        Button[] buttons = {
-                b0, b1,b2, b3,b4,b5,b6,b7,b8,b9, bClear,
-                bDiv,bMult,bDel,bSub,bAdd,bEquals,bBrac,bDec,bSign
-        };
     }
 
 }
