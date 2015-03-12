@@ -147,10 +147,10 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
                 break;
             case R.id.bDiv:
                 if (isLastCharNum && (!isEmpty))
-                etScreen.setText(textOnScreen + "/");
+                etScreen.append("/");
                 break;
             case R.id.bBrac:
-                etScreen.setText(textOnScreen + "");
+                etScreen.append("");
                 break;
             case R.id.bDel:
                 // if there is text on the calculator screen then delete the last character
