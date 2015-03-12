@@ -16,13 +16,13 @@
         <EditText android:id="@+id/etScreen"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-             android:layout_gravity="top"
+            android:layout_gravity="top"
             android:gravity="right"
             android:textSize="40dp"
             android:inputType="numberSigned"
             android:cursorVisible= "true"/>
-    </LinearLayout>
 
+    </LinearLayout>
 
     <LinearLayout android:id="@+id/row1"
         android:orientation="horizontal"
@@ -32,34 +32,33 @@
         android:layout_margin="2dp"
         android:weightSum="100">
 
-        <Button android:id="@+id/bClear"
-        android:layout_width="0dp"
-        android:layout_weight="25"
-        android:layout_height="fill_parent"
-        android:text="C"
-        android:textSize="30dp"/>
-
-        <Button android:id="@+id/bDiv"
+            <Button android:id="@+id/bClear"
             android:layout_width="0dp"
             android:layout_weight="25"
             android:layout_height="fill_parent"
-            android:text="/"
+            android:text="C"
             android:textSize="30dp"/>
 
-        <Button android:id="@+id/bMult"
-            android:layout_width="0dp"
-            android:layout_weight="25"
-            android:layout_height="fill_parent"
-            android:text="X"
-            android:textSize="30dp"/>
+            <Button android:id="@+id/bDiv"
+                android:layout_width="0dp"
+                android:layout_weight="25"
+                android:layout_height="fill_parent"
+                android:text="/"
+                android:textSize="30dp"/>
 
-        <Button android:id="@+id/bDel"
-            android:layout_width="0dp"
-            android:layout_weight="25"
-            android:layout_height="fill_parent"
-            android:text="Delete"
-            android:textSize="15dp"/>
+            <Button android:id="@+id/bMult"
+                android:layout_width="0dp"
+                android:layout_weight="25"
+                android:layout_height="fill_parent"
+                android:text="X"
+                android:textSize="30dp"/>
 
+            <Button android:id="@+id/bDel"
+                android:layout_width="0dp"
+                android:layout_weight="25"
+                android:layout_height="fill_parent"
+                android:text="Delete"
+                android:textSize="15dp"/>
 
     </LinearLayout>
 
@@ -98,6 +97,7 @@
             android:layout_height="fill_parent"
             android:text="-"
             android:textSize="45dp"/>
+
     </LinearLayout>
 
     <LinearLayout android:id="@+id/row3"
@@ -134,8 +134,6 @@
             android:layout_height="fill_parent"
             android:text="+"
             android:textSize="45dp"/>
-
-
 
     </LinearLayout>
 
@@ -216,5 +214,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="13">
+
     </LinearLayout>
+
 </LinearLayout>

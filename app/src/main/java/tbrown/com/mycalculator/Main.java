@@ -16,54 +16,19 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
             b5,b6,b7,b8,b9,bSub,bAdd,bBrac,bEquals,
             bDec,bSign;
 
+    // Imported object from downloaded library supports evaluation of math expressions  as strings
     MathEval ans = new MathEval();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        initialize();
-        setListeners();
-
+        initializeAllWidgets();
+        setAllListeners();
     }
 
-    private void setListeners() {
-        /*int i;
-        System.out.print(buttons);
-        for (i = 0; i < buttons.length; i++) {
-        try {
-                buttons[i].setOnClickListener(this);
-            } catch (NullPointerException e){
-                System.out.println(buttons);
-                System.out.println(buttons[i]);
-            }
-        } */
-
-        b0.setOnClickListener(this);
-        b1.setOnClickListener(this);
-        b2.setOnClickListener(this);
-        b3.setOnClickListener(this);
-        b4.setOnClickListener(this);
-        b5.setOnClickListener(this);
-        b6.setOnClickListener(this);
-        b7.setOnClickListener(this);
-        b8.setOnClickListener(this);
-        b9.setOnClickListener(this);
-        bEquals.setOnClickListener(this);
-        bBrac.setOnClickListener(this);
-        bSign.setOnClickListener(this);
-        bDel.setOnClickListener(this);
-        bDiv.setOnClickListener(this);
-        bDec.setOnClickListener(this);
-        bSub.setOnClickListener(this);
-        bAdd.setOnClickListener(this);
-        bMult.setOnClickListener(this);
-        bClear.setOnClickListener(this);
-    }
-
-
-
-    private void initialize(){
+    private void initializeAllWidgets(){
+        // This method imports and initializes all widgets from the xml layout
         etScreen = (EditText) findViewById(R.id.etScreen);
         etScreen.requestFocus();
         etScreen.setSelection(0);
@@ -87,84 +52,110 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
         bEquals = (Button) findViewById(R.id.bEquals);
         bDec = (Button) findViewById(R.id.bDec);
         bSign = (Button) findViewById(R.id.bSign);
-
-        // create array of buttons:
-
+    }
+    
+    private void setAllListeners() {
+        // This method sets the onClick Listeners for all imported widgets
+        b0.setOnClickListener(this);
+        b1.setOnClickListener(this);
+        b2.setOnClickListener(this);
+        b3.setOnClickListener(this);
+        b4.setOnClickListener(this);
+        b5.setOnClickListener(this);
+        b6.setOnClickListener(this);
+        b7.setOnClickListener(this);
+        b8.setOnClickListener(this);
+        b9.setOnClickListener(this);
+        bEquals.setOnClickListener(this);
+        bBrac.setOnClickListener(this);
+        bSign.setOnClickListener(this);
+        bDel.setOnClickListener(this);
+        bDiv.setOnClickListener(this);
+        bDec.setOnClickListener(this);
+        bSub.setOnClickListener(this);
+        bAdd.setOnClickListener(this);
+        bMult.setOnClickListener(this);
+        bClear.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        String currentText = etScreen.getText().toString();
-        boolean isEmpty = currentText.isEmpty();
-        boolean isLastCharNum = isLastNum(currentText);
+        /* This method specifies the resulting action applied to the screen of the calculator
+              when each button is clicked 
+         */
+        
+        
+        String textOnScreen = etScreen.getText().toString();
+        boolean isEmpty = textOnScreen.isEmpty();
+        boolean isLastCharNum = isLastNum(textOnScreen);
         switch (v.getId()) {
             case R.id.bClear:
                 etScreen.setText("");
                 break;
             case R.id.b0:
-                etScreen.setText(currentText + "0");
+                etScreen.append("0");
                 break;
             case R.id.b1:
-                etScreen.setText(currentText + "1");
+                etScreen.append("1");
                 break;
             case R.id.b2:
-                etScreen.setText(currentText + "2");
+                etScreen.append("2");
                 break;
             case R.id.b3:
-                etScreen.setText(currentText + "3");
+                etScreen.append("3");
                 break;
             case R.id.b4:
-                etScreen.setText(currentText + "4");
+                etScreen.append("4");
                 break;
             case R.id.b5:
-                etScreen.setText(currentText + "5");
+                etScreen.append("5");
                 break;
             case R.id.b6:
-                etScreen.setText(currentText + "6");
+                etScreen.append("6");
                 break;
             case R.id.b7:
-                etScreen.setText(currentText + "7");
+                etScreen.append("7");
                 break;
             case R.id.b8:
-                etScreen.setText(currentText + "8");
+                etScreen.append("8");
                 break;
             case R.id.b9:
-                etScreen.setText(currentText + "9");
+                etScreen.append("9");
                 break;
             case R.id.bSign:
-                etScreen.setText(currentText);
+                etScreen.setText(textOnScreen);
                 break;
             case R.id.bDec:
                 if (isLastCharNum)
-                etScreen.setText(currentText + ".");
+                etScreen.setText(textOnScreen + ".");
                 break;
             case R.id.bSub:
                 if (isLastCharNum)
-                etScreen.setText(currentText + "-");
+                etScreen.append("-");
                 break;
             case R.id.bAdd:
                 if (isLastCharNum)
-                etScreen.setText(currentText + "+");
+                etScreen.append("+");
                 break;
             case R.id.bEquals:
-                if (isLastCharNum)
-                etScreen.setText("" + ans.evaluate(currentText));
+                if (isLastCharNum && (!isEmpty))
+                etScreen.setText("" + ans.evaluate(textOnScreen));
                 break;
             case R.id.bMult:
-                if (isLastCharNum)
-                etScreen.setText(currentText + "*");
+                if (isLastCharNum && (!isEmpty))
+                etScreen.setText(textOnScreen + "*");
                 break;
             case R.id.bDiv:
-                if (isLastCharNum)
-                etScreen.setText(currentText + "/");
+                if (isLastCharNum && (!isEmpty))
+                etScreen.setText(textOnScreen + "/");
                 break;
             case R.id.bBrac:
-                etScreen.setText(currentText + "");
+                etScreen.setText(textOnScreen + "");
                 break;
             case R.id.bDel:
                 // if there is text on the calculator screen then delete the last character
                 if (!isEmpty) {
-                    etScreen.setText(currentText.substring(0, currentText.length() - 1));
+                    etScreen.setText(textOnScreen.substring(0, textOnScreen.length() - 1));
                     break;
                 } else { break; }
         }
@@ -181,5 +172,4 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
             return Character.isDigit(lastChar);
         }
     }
-
 }
