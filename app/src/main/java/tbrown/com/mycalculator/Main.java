@@ -131,11 +131,11 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
                 break;
             case R.id.bSub:
                 if (isLastCharNum)
-                etScreen.append("-");
+                etScreen.setText(textOnScreen + "-");
                 break;
             case R.id.bAdd:
                 if (isLastCharNum)
-                etScreen.append("+");
+                etScreen.setText(textOnScreen + "+");
                 break;
             case R.id.bEquals:
                 if (isLastCharNum && (!isEmpty))
@@ -147,7 +147,7 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
                 break;
             case R.id.bDiv:
                 if (isLastCharNum && (!isEmpty))
-                etScreen.append("/");
+                etScreen.setText(textOnScreen + "/");
                 break;
             case R.id.bBrac:
                 etScreen.append("");
@@ -159,7 +159,6 @@ public class Main extends ActionBarActivity implements View.OnClickListener{
                     break;
                 } else { break; }
         }
-
     }
 
     private boolean isLastNum(String s) {
