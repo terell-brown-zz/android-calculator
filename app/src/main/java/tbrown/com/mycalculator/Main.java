@@ -7,14 +7,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 
-
 public class Main extends ActionBarActivity implements View.OnClickListener {
 
     // Import widgets into Java as Objects;
     EditText etScreen;
+    String textOnScreen;
     Button bClear, bDiv, bMult, bDel, b0, b1, b2, b3, b4,
             b5, b6, b7, b8, b9, bSub, bAdd, bBrac, bEquals,
             bDec;
+
 
     // Imported object from downloaded library supports evaluation of math expressions  as strings
     MathEval ans = new MathEval();
@@ -106,34 +107,34 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
                 break;
 
             case R.id.b0:
-                etScreen.append("0");
+                addNumtoScreen(textOnScreen,typeLastChar,0);
                 break;
             case R.id.b1:
-                etScreen.append("1");
+                addNumtoScreen(textOnScreen, typeLastChar, 1);
                 break;
             case R.id.b2:
-                etScreen.append("2");
+                addNumtoScreen(textOnScreen, typeLastChar, 2);
                 break;
             case R.id.b3:
-                etScreen.append("3");
+                addNumtoScreen(textOnScreen, typeLastChar, 3);
                 break;
             case R.id.b4:
-                etScreen.append("4");
+                addNumtoScreen(textOnScreen, typeLastChar, 4);
                 break;
             case R.id.b5:
-                etScreen.append("5");
+                addNumtoScreen(textOnScreen, typeLastChar, 5);
                 break;
             case R.id.b6:
-                etScreen.append("6");
+                addNumtoScreen(textOnScreen, typeLastChar, 6);
                 break;
             case R.id.b7:
-                etScreen.append("7");
+                addNumtoScreen(textOnScreen, typeLastChar, 7);
                 break;
             case R.id.b8:
-                etScreen.append("8");
+                addNumtoScreen(textOnScreen, typeLastChar, 8);
                 break;
             case R.id.b9:
-                etScreen.append("9");
+                addNumtoScreen(textOnScreen, typeLastChar, 9);
                 break;
             case R.id.bDec:
                 if (typeLastChar == "NUM")
@@ -150,6 +151,7 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
             case R.id.bEquals:
                 if ((typeLastChar == "NUM" || typeLastChar == "CLOSED_BRACKET")
                         && NoOpenBrackets == 0) {
+                    etScreen.setText("9");
                     etScreen.setText("" + ans.evaluate(textOnScreen));
                 }
                 break;
@@ -166,16 +168,11 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
                 }
                 break;
             case R.id.bBrac:
-                etScreen.setText(textOnScreen + addBrackets(typeLastChar, NoOpenBrackets));
+                etScreen.setText(textOnScreen + addBrackets(typeLastChar));
                 break;
             case R.id.bDel:
-                // if there is text on the calculator screen then delete the last character
-                if (!isEmpty) {
-                    etScreen.setText(textOnScreen.substring(0, textOnScreen.length() - 1));
-                    break;
-                } else {
-                    break;
-                }
+                deleteLastChar(textOnScreen,typeLastChar);
+                break;
         }
     }
 
@@ -229,9 +226,37 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
             return type;
         }
     }
+    public void addNumtoScreen(String text,String type, int num) {
+        // This method adds a number to the calculator screen
+        if (type == "CLOSED_BRACKET") {
+            etScreen.setText(text + "*(" + num);
+            NoOpenBrackets ++;
+        } else {
+            etScreen.setText(text + num);
+        }
+    }
+
+    public void deleteLastChar(String text, String type) {
+        /* This method delete the last character of the text and prints it to the screen of
+        *    the calculator. Based on the type of the last character other actions are taken
+        */
+        if (!text.isEmpty()) {
+            etScreen.setText(text.substring(0, text.length() - 1));
+            switch (type) {
+                case "OPEN_BRACKET":
+                    NoOpenBrackets--;
+                    break;
+                case "CLOSED_BRACKET":
+                    NoOpenBrackets++;
+                    break;
+            }
+        } else {
+            return;
+        }
+    }
 
 
-    public String addBrackets(String typeLastChar, int noOpenBrackets) {
+    public String addBrackets(String typeLastChar) {
         /* This method returns a string containing the desired result when the bracket button is
         *    is pressed depending on the type of the last character on the calculator screen
         *    (textOnScreen) and the number of open brackets
@@ -244,7 +269,7 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
                  return "(";
              case "NUM":
              case "CLOSED_BRACKET":
-                 if (noOpenBrackets > 0 ){
+                 if (NoOpenBrackets > 0){
                      NoOpenBrackets --;
                      return ")";
                  } else {
@@ -252,14 +277,14 @@ public class Main extends ActionBarActivity implements View.OnClickListener {
                      return "*(";
                  }
              case "PLUS_MINUS_DEC":
-                 return "";
+                 NoOpenBrackets ++;
+                 return "(";
              case "NONE":
              case "MULT_DIV":
                  NoOpenBrackets ++;
                  return "(";
              default:
                  return null;
-
          }
     }
 }
