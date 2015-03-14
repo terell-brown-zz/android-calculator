@@ -193,11 +193,11 @@
             android:text="."
             android:textSize="45dp"/>
 
-        <Button android:id="@+id/bSign"
+        <Button android:id="@+id/bBlank"
             android:layout_width="0dp"
             android:layout_weight="25"
             android:layout_height="fill_parent"
-            android:text="+/-"
+            android:text=""
             android:textSize="30dp"/>
 
         <Button android:id="@+id/bEquals"
